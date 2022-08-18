@@ -64,6 +64,10 @@ local master_postinit = function(inst)
 	inst:ListenForEvent("duel", duel)
 	inst:ListenForEvent("unduel", unduel)
 
+	--睡眠
+	inst.components.sleepingbaguser:SetSanityBonusMult(0.5)
+	inst.components.sleepingbaguser:SetHealthBonusMult(0.5)
+
 end
 
 return MakePlayerCharacter("yusaku", prefabs, assets, common_postinit, master_postinit, start_inv)
