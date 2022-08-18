@@ -8,34 +8,40 @@ local prefabs = {}
 -- 初始物品
 local start_inv = {
     -- "spear", --自带一个长矛
+	"yu_tablet",
+	"yu_tablet",
+	"yu_dueldisk"
 }
 
-local hassanbuff = false
 local function onsanitydelta(inst, data)
-	if hassanbuff then
-		if TheWorld.state.isday and not TheWorld:HasTag("cave") then
-			hassanbuff = false
-			inst.components.sanity.dapperness = 0
-		end
-	else
-		if not TheWorld.state.isday and data.newpercent < 0.175 then
-			hassanbuff = true
-			inst.components.sanity.dapperness = TUNING.DAPPERNESS_MED
-		end
-	end
+	inst.components.sanity.dapperness = data.newpercent < 0.175 and not TheWorld.state.isday and TUNING.DAPPERNESS_MED or 0
+end
+
+local function duel(inst)
+	print("duel+++++++++")
+end
+
+local function unduel(inst)
+	print("unduel+++++++++")
 end
 
 -- 这个函数将在服务器和客户端都会执行
 -- 一般用于添加小地图标签等动画文件或者需要主客机都执行的组件（少数）
 local common_postinit = function(inst)
-    -- Minimap icon
-    inst.MiniMapEntity:SetIcon("yusaku.tex")
+	inst.MiniMapEntity:SetIcon("yusaku.tex")
+	inst:AddTag("yusaku")
+	--replica 标签
+	inst:AddTag("_yu_duel")
+
 end
 
 -- 这里的的函数只在主机执行  一般组件之类的都写在这里
 local master_postinit = function(inst)
+	--移除replica标签方便再次加上
+	inst:RemoveTag("_yu_duel")
+
     -- 人物音效
-    inst.soundsname = "willow"
+    inst.soundsname = "wilson"
 
     -- 最喜欢的食物  
     inst.components.foodaffinity:AddPrefabAffinity("baconeggs", TUNING.AFFINITY_15_CALORIES_HUGE)
@@ -51,6 +57,11 @@ local master_postinit = function(inst)
 
 	--san低于一定程度时，且非地面早上，加个相当于高礼帽的回san 
 	inst:ListenForEvent("sanitydelta", onsanitydelta)
+
+	--变身
+	inst:AddComponent("yu_duel")
+	inst:ListenForEvent("duel", duel)
+	inst:ListenForEvent("unduel", unduel)
 
 end
 
