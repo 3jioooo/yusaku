@@ -1,7 +1,7 @@
 local Badge = require "widgets/badge"
 
 --rgbl，0~1，red green blue 透明度
-local COLOR = {255/255, 0/255, 0/255, 1}
+local COLOR = {70/255, 48/255, 218/255, 1}
 
 AddClassPostConstruct("widgets/sanitybadge", function (self)
     if not self.owner.replica.yu_duel then return end
