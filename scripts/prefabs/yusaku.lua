@@ -56,7 +56,7 @@ local master_postinit = function(inst)
 	inst:RemoveTag("_yu_duel")
 
     -- 人物音效
-    inst.soundsname = "wilson"
+    inst.soundsname = "willow"
 
     -- 最喜欢的食物  
     inst.components.foodaffinity:AddPrefabAffinity("baconeggs", TUNING.AFFINITY_15_CALORIES_HUGE)

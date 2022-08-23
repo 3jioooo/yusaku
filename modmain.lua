@@ -58,7 +58,7 @@ PREFAB_SKINS["yusaku"] = { -- 修复人物大图显示
 -- The character select screen lines  --人物选人界面的描述
 STRINGS.CHARACTER_TITLES.yusaku = "藤木游作"
 STRINGS.CHARACTER_NAMES.yusaku = "藤木游作"
-STRINGS.CHARACTER_DESCRIPTIONS.yusaku = "*使用决斗盘进行变身\n*意志坚强\n*受梦魇侵袭辗转反侧"
+STRINGS.CHARACTER_DESCRIPTIONS.yusaku = "*使用决斗盘进行变身\n*意志坚强\n*制作热狗与药片\n*睡眠质量不佳"
 STRINGS.CHARACTER_QUOTES.yusaku = "我会向那些夺走我的过去的人复仇。"
 
 -- Custom speech strings  ----人物语言文件  可以进去自定义
@@ -117,12 +117,12 @@ for k, v in pairs(foods) do
     AddCookerRecipe("cookpot", v)
 end
 STRINGS.NAMES.YU_HOTDOG = "热狗"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_HOTDOG = "热乎乎的~"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_HOTDOG = "有人知道上面涂的是什么酱吗？"
 
 --item
 modimport("scripts/yu_recipes")
 STRINGS.NAMES.YU_TABLET = "药片"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_TABLET = "提神醒脑。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_TABLET = "有谁通过它来暂时性地忘却悲痛。"
 STRINGS.NAMES.YU_DUELDISK = "决斗盘"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_DUELDISK = "最强的决斗者一切都是必然。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_DUELDISK = "与决斗者密不可分的武器。"
 
