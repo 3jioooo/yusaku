@@ -1,9 +1,13 @@
 local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
-    Asset("SCRIPT", "scripts/prefabs/player_common.lua")
+    Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
+	--Anim
+	Asset("ANIM", "anim/yusaku_duel.zip"),
 }
-local prefabs = {}
+local prefabs = {
+	"yf_duel"
+}
 
 -- 初始物品
 local start_inv = {
@@ -19,11 +23,20 @@ local function onsanitydelta(inst, data)
 end
 
 local function duel(inst)
-	print("duel+++++++++")
+	inst.AnimState:SetSkin("yusaku_duel","yusaku")
 end
 
 local function unduel(inst)
-	print("unduel+++++++++")
+	inst.AnimState:SetSkin("yusaku")
+end
+
+local function forceunduel(inst)
+	inst.AnimState:SetSkin("yusaku")
+	local prefab = SpawnPrefab("yf_duel")
+	if prefab then
+		prefab.entity:SetParent(inst.entity)
+		prefab.Transform:SetPosition(0,0,0)
+	end
 end
 
 -- 这个函数将在服务器和客户端都会执行
@@ -63,6 +76,8 @@ local master_postinit = function(inst)
 	inst:AddComponent("yu_duel")
 	inst:ListenForEvent("duel", duel)
 	inst:ListenForEvent("unduel", unduel)
+	inst:ListenForEvent("forceunduel", forceunduel)
+
 
 	--睡眠
 	inst.components.sleepingbaguser:SetSanityBonusMult(0.5)

@@ -1,3 +1,39 @@
+------------------State
+local states = {
+    State{
+        name = "yu_changeduel",
+        tags = { "busy", "doing","canrotate" },
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("idle")
+
+            local prefab = SpawnPrefab("yf_duel")
+            if prefab then
+                prefab.entity:SetParent(inst.entity)
+                prefab.Transform:SetPosition(0,0,0)
+            end
+        end,
+        timeline =
+        {
+            TimeEvent(0.31, function(inst)
+                if inst.components.yu_duel then
+                    inst.components.yu_duel:ChangeState()
+                end
+            end),
+            TimeEvent(0.35, function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
+        -- ontimeout = function(inst)
+        --     inst.sg:GoToState("idle")
+        -- end,
+    },
+}
+for k, state in pairs(states) do 
+    AddStategraphState("wilson", state)
+    AddStategraphState("wilson_client", state)
+end
+------------------Action
 local function MakeAction(data, str, fn, strfn)
     local action = Action(data)
     action.str = str or "TestAction"
@@ -29,7 +65,7 @@ local ACTIONS =
                 return true
             end
         end), 
-        anim = "dolongaction",   --string or function(inst, action)  server
+        anim = "yu_changeduel",   --string or function(inst, action)  server
     },
 
     YU_UNDUEL = { 
@@ -40,7 +76,7 @@ local ACTIONS =
                 return true
             end
         end), 
-        anim = "dolongaction",   --string or function(inst, action)  server
+        anim = "yu_changeduel",   --string or function(inst, action)  server
     },
 }
 

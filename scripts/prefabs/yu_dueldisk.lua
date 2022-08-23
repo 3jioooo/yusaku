@@ -5,15 +5,15 @@ local assets = {
 
 local lastowner = nil
 local function onputininventory(inst, owner)
-    if lastowner and lastowner:HasTag("yusaku") then
-        lastowner:PushEvent("unduel")
+    if lastowner and lastowner.components.yu_duel then
+        lastowner.components.yu_duel:UnDuel()
     end
     lastowner = owner
 end
 
 local function ondropped(inst)
-    if lastowner and lastowner:HasTag("yusaku") then
-        lastowner:PushEvent("unduel")
+    if lastowner and lastowner.components.yu_duel then
+        lastowner.components.yu_duel:UnDuel()
     end
     lastowner = nil
 end
