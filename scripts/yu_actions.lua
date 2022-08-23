@@ -16,19 +16,10 @@ local states = {
         onenter = function(inst)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("idle")
-            if TheWorld.ismastersim then
-                local prefab = SpawnPrefab("yf_duel")   --开预测时会有延迟
-                if prefab then
-                    prefab.entity:SetParent(inst.entity)
-                    prefab.Transform:SetPosition(0,0,0)
-                end
-            end
+            PerformAction(inst)
         end,
         timeline =
         {
-            TimeEvent(0.31, function(inst)
-                PerformAction(inst)
-            end),
             TimeEvent(0.35, function(inst)
                 inst.sg:GoToState("idle")
             end),

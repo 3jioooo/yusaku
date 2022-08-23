@@ -5,7 +5,7 @@ local assets = {
 
 
 local function onputininventory(inst, owner)
-    if inst.lastowner and inst.lastowner.components.yu_duel then
+    if inst.lastowner and inst.lastowner~=owner and inst.lastowner.components.yu_duel then
         inst.lastowner.components.yu_duel:UnDuel()
     end
     inst.lastowner = owner

@@ -18,27 +18,26 @@ local start_inv = {
 }
 
 local function onsanitydelta(inst, data)
+	if data.newpercent <= 0 then
+		inst.components.yu_duel:UnDuel()
+	end
+
 	inst.components.sanity.dapperness = data.newpercent < 0.175 and (not TheWorld.state.isday or TheWorld:HasTag("cave")) 
 		and TUNING.DAPPERNESS_MED or 0
 end
 
-local function duel(inst)
-	inst.AnimState:SetSkin("yusaku_duel","yusaku")
+local function SetSkin(inst, skin, default)
+	inst.AnimState:SetSkin(skin, default)
 end
 
-local function unduel(inst)
-	inst.AnimState:SetSkin("yusaku")
-end
-
-local function sanityunduel(inst, data)
-	if data.newpercent <= 0 then
-		local prefab = SpawnPrefab("yf_duel")
-		if prefab then
-			prefab.entity:SetParent(inst.entity)
-			prefab.Transform:SetPosition(0,0,0)
-		end
-		inst.components.yu_duel:UnDuel()
+local function ChangeDuelSkin(inst, isduel)
+	local prefab = SpawnPrefab("yf_duel")
+	prefab.entity:SetParent(inst.entity)
+	prefab.Transform:SetPosition(0,0,0)
+	if inst.changeskintask then
+		inst.changeskintask:Cancel()
 	end
+	inst.changeskintask = inst:DoTaskInTime(0.3, SetSkin, isduel and "yusaku_duel" or "yusaku", "yusaku")
 end
 
 -- 这个函数将在服务器和客户端都会执行
@@ -76,9 +75,12 @@ local master_postinit = function(inst)
 
 	--变身
 	inst:AddComponent("yu_duel")
-	inst:ListenForEvent("duel", duel)
-	inst:ListenForEvent("unduel", unduel)
-    inst:ListenForEvent("sanitydelta", sanityunduel)
+	inst:ListenForEvent("duel", function (inst)
+		ChangeDuelSkin(inst, true)
+	end)
+	inst:ListenForEvent("unduel", function (inst)
+		ChangeDuelSkin(inst, false)
+	end)
 
 	--睡眠
 	inst.components.sleepingbaguser:SetSanityBonusMult(0.5)
