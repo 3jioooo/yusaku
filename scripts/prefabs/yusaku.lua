@@ -30,12 +30,14 @@ local function unduel(inst)
 	inst.AnimState:SetSkin("yusaku")
 end
 
-local function forceunduel(inst)
-	inst.AnimState:SetSkin("yusaku")
-	local prefab = SpawnPrefab("yf_duel")
-	if prefab then
-		prefab.entity:SetParent(inst.entity)
-		prefab.Transform:SetPosition(0,0,0)
+local function sanityunduel(inst, data)
+	if data.newpercent <= 0 then
+		local prefab = SpawnPrefab("yf_duel")
+		if prefab then
+			prefab.entity:SetParent(inst.entity)
+			prefab.Transform:SetPosition(0,0,0)
+		end
+		inst.components.yu_duel:UnDuel()
 	end
 end
 
@@ -76,8 +78,7 @@ local master_postinit = function(inst)
 	inst:AddComponent("yu_duel")
 	inst:ListenForEvent("duel", duel)
 	inst:ListenForEvent("unduel", unduel)
-	inst:ListenForEvent("forceunduel", forceunduel)
-
+    inst:ListenForEvent("sanitydelta", sanityunduel)
 
 	--睡眠
 	inst.components.sleepingbaguser:SetSanityBonusMult(0.5)

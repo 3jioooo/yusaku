@@ -3,19 +3,19 @@ local assets = {
     Asset("ATLAS", "images/inventoryimages/yu_dueldisk.xml")
 }
 
-local lastowner = nil
+
 local function onputininventory(inst, owner)
-    if lastowner and lastowner.components.yu_duel then
-        lastowner.components.yu_duel:UnDuel()
+    if inst.lastowner and inst.lastowner.components.yu_duel then
+        inst.lastowner.components.yu_duel:UnDuel()
     end
-    lastowner = owner
+    inst.lastowner = owner
 end
 
 local function ondropped(inst)
-    if lastowner and lastowner.components.yu_duel then
-        lastowner.components.yu_duel:UnDuel()
+    if inst.lastowner and inst.lastowner.components.yu_duel then
+        inst.lastowner.components.yu_duel:UnDuel()
     end
-    lastowner = nil
+    inst.lastowner = nil
 end
 
 local function fn()

@@ -4,7 +4,7 @@ local Badge = require "widgets/badge"
 local COLOR = {70/255, 48/255, 218/255, 1}
 
 AddClassPostConstruct("widgets/sanitybadge", function (self)
-    if not self.owner.replica.yu_duel then return end
+    if self.owner.prefab~="yusaku" then return  end
 
     local DoTransition = self.DoTransition
     self.DoTransition = function(self)  --登入/登出     进出月岛
@@ -15,4 +15,9 @@ AddClassPostConstruct("widgets/sanitybadge", function (self)
             self.circleframe:GetAnimState():OverrideSymbol("icon", "yu_status_sanity", "icon")
         end
     end
+
+    self.owner:ListenForEvent("yu_duelchanged",function (inst, data)
+        self.sanitymode = nil
+        self:SetPercent(self.val, self.max, self.penaltypercent)
+    end)
 end)
