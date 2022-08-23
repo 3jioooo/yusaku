@@ -1,4 +1,14 @@
-------------------State
+------------------State  player_server/client
+--非预测：只有服务器运行    
+--预测：服务器和客户端都运行，用TheWorld.ismastersim区分是否是服务器，会有延迟   
+local function PerformAction(inst)
+    if TheWorld.ismastersim then
+        inst:PerformBufferedAction()    --服务器调用
+    else
+        inst:PerformPreviewBufferedAction() --客户端运程调用
+    end
+end
+
 local states = {
     State{
         name = "yu_changeduel",
@@ -6,27 +16,23 @@ local states = {
         onenter = function(inst)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("idle")
-
-            local prefab = SpawnPrefab("yf_duel")
-            if prefab then
-                prefab.entity:SetParent(inst.entity)
-                prefab.Transform:SetPosition(0,0,0)
+            if TheWorld.ismastersim then
+                local prefab = SpawnPrefab("yf_duel")   --开预测时会有延迟
+                if prefab then
+                    prefab.entity:SetParent(inst.entity)
+                    prefab.Transform:SetPosition(0,0,0)
+                end
             end
         end,
         timeline =
         {
             TimeEvent(0.31, function(inst)
-                if inst.components.yu_duel then
-                    inst.components.yu_duel:ChangeState()
-                end
+                PerformAction(inst)
             end),
             TimeEvent(0.35, function(inst)
                 inst.sg:GoToState("idle")
             end),
         },
-        -- ontimeout = function(inst)
-        --     inst.sg:GoToState("idle")
-        -- end,
     },
 }
 for k, state in pairs(states) do 
@@ -42,7 +48,7 @@ local function MakeAction(data, str, fn, strfn)
     return action
 end
 
---服务器调用，具体效果
+--具体效果，要判断组件，服务器运行具体函数
 local ACTIONS = 
 {
     YU_SANITYHEAL = { 
