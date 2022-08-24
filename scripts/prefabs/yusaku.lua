@@ -2,8 +2,10 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
-	--Anim
+	--skin
 	Asset("ANIM", "anim/yusaku_duel.zip"),
+	--action
+	Asset("ANIM", "anim/yu_duel.zip"),
 }
 local prefabs = {
 	"yf_duel"
@@ -26,18 +28,15 @@ local function onsanitydelta(inst, data)
 		and TUNING.DAPPERNESS_MED or 0
 end
 
-local function SetSkin(inst, skin, default)
-	inst.AnimState:SetSkin(skin, default)
+local function onduel(inst, data)
+	inst.AnimState:SetSkin("yusaku_duel", "yusaku")
 end
 
-local function ChangeDuelSkin(inst, isduel)
+local function onunduel(inst, data)
 	local prefab = SpawnPrefab("yf_duel")
 	prefab.entity:SetParent(inst.entity)
 	prefab.Transform:SetPosition(0,0,0)
-	if inst.changeskintask then
-		inst.changeskintask:Cancel()
-	end
-	inst.changeskintask = inst:DoTaskInTime(0.3, SetSkin, isduel and "yusaku_duel" or "yusaku", "yusaku")
+	inst.AnimState:SetSkin("yusaku")
 end
 
 -- 这个函数将在服务器和客户端都会执行
@@ -54,6 +53,9 @@ end
 local master_postinit = function(inst)
 	--移除replica标签方便再次加上
 	inst:RemoveTag("_yu_duel")
+
+	--动画
+	inst.AnimState:AddOverrideBuild("yu_duel")
 
     -- 人物音效
     inst.soundsname = "willow"
@@ -75,12 +77,8 @@ local master_postinit = function(inst)
 
 	--变身
 	inst:AddComponent("yu_duel")
-	inst:ListenForEvent("duel", function (inst)
-		ChangeDuelSkin(inst, true)
-	end)
-	inst:ListenForEvent("unduel", function (inst)
-		ChangeDuelSkin(inst, false)
-	end)
+	inst:ListenForEvent("duel", onduel)
+	inst:ListenForEvent("unduel", onunduel)
 
 	--睡眠
 	inst.components.sleepingbaguser:SetSanityBonusMult(0.5)

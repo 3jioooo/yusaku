@@ -11,19 +11,37 @@ end
 
 local states = {
     State{
-        name = "yu_changeduel",
-        tags = { "busy", "doing","canrotate" },
+        name = "yu_duel",
+        tags = { "busy", "nodangle" },
         onenter = function(inst)
             inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("idle")
-            PerformAction(inst)
+            inst.AnimState:PlayAnimation("yu_duel")
         end,
+
         timeline =
         {
-            TimeEvent(0.35, function(inst)
-                inst.sg:GoToState("idle")
+            TimeEvent(1, function(inst)
+                PerformAction(inst)
             end),
         },
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+    },
+
+    State{
+        name = "yu_unduel",
+        tags = { "nodangle" },
+        onenter = function(inst)
+            PerformAction(inst)
+            inst.sg:GoToState("idle")
+        end,
     },
 }
 for k, state in pairs(states) do 
@@ -51,7 +69,7 @@ local ACTIONS =
                 end
             end
         end), 
-        anim = "dolongaction",   --string or function(inst, action)  server
+        state = "dolongaction",   --string or function(inst, action)  server
     },
     
     YU_DUEL = { 
@@ -62,7 +80,7 @@ local ACTIONS =
                 return true
             end
         end), 
-        anim = "yu_changeduel",   --string or function(inst, action)  server
+        state = "yu_duel",   --string or function(inst, action)  server
     },
 
     YU_UNDUEL = { 
@@ -73,7 +91,7 @@ local ACTIONS =
                 return true
             end
         end), 
-        anim = "yu_changeduel",   --string or function(inst, action)  server
+        state = "yu_unduel",   --string or function(inst, action)  server
     },
 }
 
@@ -82,6 +100,6 @@ for k, v in pairs(ACTIONS) do
     v.action.id = k
     AddAction(v.action) --注册动作
     --当动画结束时处理对应动作
-    AddStategraphActionHandler("wilson", ActionHandler(v.action, v.anim))	--sg设置，联机版要两个都加 wilson，wilson_client
-    AddStategraphActionHandler("wilson_client", ActionHandler(v.action, v.clientanim or v.anim))    --这个函数是用来给指定的SG添加ActionHandler的。
+    AddStategraphActionHandler("wilson", ActionHandler(v.action, v.state))	--sg设置，联机版要两个都加 wilson，wilson_client
+    AddStategraphActionHandler("wilson_client", ActionHandler(v.action, v.state))    --这个函数是用来给指定的SG添加ActionHandler的。
 end
