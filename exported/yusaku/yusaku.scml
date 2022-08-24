@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="b10">
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r4.1">
     <folder id="0" name="face">
         <file id="0" name="face/face-0.png" width="200" height="200" pivot_x="0.542747" pivot_y="0.570502"/>
         <file id="1" name="face/face-1.png" width="200" height="200" pivot_x="0.542747" pivot_y="0.570502"/>
@@ -34,6 +34,7 @@
         <file id="30" name="face/face-30.png" width="200" height="200" pivot_x="0.542747" pivot_y="0.570502"/>
         <file id="31" name="face/face-31.png" width="200" height="200" pivot_x="0.542747" pivot_y="0.570502"/>
         <file id="32" name="face/face-32.png" width="200" height="200" pivot_x="0.542747" pivot_y="0.570502"/>
+        <file id="33" name="face/face-33.png" width="200" height="200" pivot_x="0.542747" pivot_y="0.570502"/>
     </folder>
     <folder id="1" name="headbase">
         <file id="0" name="headbase/headbase-0.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
@@ -90,8 +91,9 @@
         <file id="15" name="hand/hand-15.png" width="150" height="200" pivot_x="0.444496" pivot_y="0.857627"/>
         <file id="16" name="hand/hand-16.png" width="100" height="100" pivot_x="0.362994" pivot_y="0.670004"/>
         <file id="17" name="hand/hand-17.png" width="100" height="100" pivot_x="0.501494" pivot_y="0.697004"/>
-		<file id="18" name="hand/hand-18.png" width="100" height="100" pivot_x="0.518245" pivot_y="0.576755" />
-		<file id="19" name="hand/hand-19.png" width="100" height="100" pivot_x="0.471745" pivot_y="0.486405" />
+        <file id="18" name="hand/hand-18.png" width="100" height="100" pivot_x="0.518245" pivot_y="0.576755"/>
+        <file id="19" name="hand/hand-19.png" width="100" height="100" pivot_x="0.471745" pivot_y="0.486405"/>
+        <file id="20" name="hand/hand-20.png" width="100" height="100" pivot_x="0.492744" pivot_y="0.621254"/>
     </folder>
     <folder id="6" name="leg">
         <file id="0" name="leg/leg-0.png" width="60" height="80" pivot_x="0.562074" pivot_y="0.751256"/>
@@ -114,6 +116,11 @@
         <file id="4" name="arm_lower/arm_lower-4.png" width="50" height="80" pivot_x="0.523989" pivot_y="0.79594"/>
         <file id="5" name="arm_lower/arm_lower-5.png" width="60" height="60" pivot_x="0.507075" pivot_y="0.720841"/>
         <file id="6" name="arm_lower/arm_lower-6.png" width="80" height="50" pivot_x="0.709368" pivot_y="0.65301"/>
+        <file id="7" name="arm_lower/arm_lower-7.png" width="50" height="50" pivot_x="0" pivot_y="1"/>
+        <file id="8" name="arm_lower/arm_lower-8.png" width="50" height="50" pivot_x="0" pivot_y="1"/>
+        <file id="9" name="arm_lower/arm_lower-9.png" width="50" height="50" pivot_x="0" pivot_y="1"/>
+        <file id="10" name="arm_lower/arm_lower-10.png" width="50" height="50" pivot_x="0" pivot_y="1"/>
+        <file id="11" name="arm_lower/arm_lower-11.png" width="50" height="50" pivot_x="0" pivot_y="1"/>
     </folder>
     <folder id="8" name="arm_upper">
         <file id="0" name="arm_upper/arm_upper-0.png" width="80" height="80" pivot_x="0.512493" pivot_y="0.732506"/>
@@ -156,18 +163,18 @@
         <file id="4" name="skirt/skirt-4.png" width="160" height="120" pivot_x="0.502184" pivot_y="0.561878"/>
     </folder>
     <folder id="14" name="tail">
-        <file id="0" name="tail/tail-0.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="1" name="tail/tail-1.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="2" name="tail/tail-2.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="3" name="tail/tail-3.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="4" name="tail/tail-4.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="5" name="tail/tail-5.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="6" name="tail/tail-6.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="7" name="tail/tail-7.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="8" name="tail/tail-8.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="9" name="tail/tail-9.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="10" name="tail/tail-10.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
-        <file id="11" name="tail/tail-11.png" width="250" height="100" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="0" name="tail/tail-0.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="1" name="tail/tail-1.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="2" name="tail/tail-2.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="3" name="tail/tail-3.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="4" name="tail/tail-4.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="5" name="tail/tail-5.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="6" name="tail/tail-6.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="7" name="tail/tail-7.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="8" name="tail/tail-8.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="9" name="tail/tail-9.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="10" name="tail/tail-10.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
+        <file id="11" name="tail/tail-11.png" width="400" height="400" pivot_x="0.628" pivot_y="0.5"/>
     </folder>
     <folder id="15" name="hairfront">
         <file id="0" name="hairfront/hairfront-0.png" width="400" height="400" pivot_x="0.50563" pivot_y="0.381312"/>
@@ -191,11 +198,11 @@
         <file id="9" name="torso_pelvis/torso_pelvis-9.png" width="160" height="120" pivot_x="0.460934" pivot_y="0.443754"/>
         <file id="10" name="torso_pelvis/torso_pelvis-10.png" width="160" height="120" pivot_x="0.515621" pivot_y="0.237712"/>
     </folder>
-	<folder id="18" name="SWAP_ICON">
-		<file id="0" name="SWAP_ICON/SWAP_ICON-0.png" width="268" height="244" pivot_x="0.5" pivot_y="0.5" />
-	</folder>
+    <folder id="18" name="SWAP_ICON">
+        <file id="0" name="SWAP_ICON/SWAP_ICON-0.png" width="268" height="244" pivot_x="0.5" pivot_y="0.5"/>
+    </folder>
     <entity id="0" name="template">
-        <animation id="0" name="BUILD_PLAYER" length="1000">
+        <animation id="0" name="BUILD_PLAYER" length="1000" interval="100">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="71" key="0" z_index="0"/>
