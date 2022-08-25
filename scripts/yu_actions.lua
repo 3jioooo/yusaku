@@ -18,11 +18,18 @@ local states = {
             inst.AnimState:PlayAnimation("yu_duel")
         end,
         
+       timeline =
+        {
+            --刷特效和变身的时间，单位秒（Sprite里的是毫秒）
+            TimeEvent(0.925, function(inst)
+                 PerformAction(inst)
+            end),
+        },
+
         events =
         {
             EventHandler("animover", function(inst)
                 if inst.AnimState:AnimDone() then
-                    PerformAction(inst)
                     inst.sg:GoToState("idle")
                 end
             end),
