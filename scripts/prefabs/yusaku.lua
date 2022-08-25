@@ -29,6 +29,9 @@ local function onsanitydelta(inst, data)
 end
 
 local function onduel(inst, data)
+	local prefab = SpawnPrefab("yf_duel")
+	prefab.entity:SetParent(inst.entity)
+	prefab.Transform:SetPosition(0,0,0)
 	inst.AnimState:SetSkin("yusaku_duel", "yusaku")
 end
 
