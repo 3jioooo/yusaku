@@ -2658,46 +2658,46 @@
             </timeline>
             <timeline id="20" name="word-11">
                 <key id="0" time="818" spin="0">
-                    <object folder="15" file="3" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="3" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="1" time="833" spin="0">
-                    <object folder="15" file="4" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="4" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="2" time="851" spin="0">
-                    <object folder="15" file="5" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="5" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="3" time="871" spin="0">
-                    <object folder="15" file="5" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="5" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="4" time="880" spin="0">
-                    <object folder="15" file="5" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="5" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="5" time="888" spin="0">
-                    <object folder="15" file="7" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="7" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="6" time="906" spin="0">
-                    <object folder="15" file="8" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="8" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="7" time="924" spin="0">
-                    <object folder="15" file="9" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="9" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="8" time="941" spin="0">
-                    <object folder="15" file="10" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="10" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="9" time="959" spin="0">
-                    <object folder="15" file="11" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="11" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="10" time="976" spin="0">
-                    <object folder="15" file="0" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="0" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="11" time="992" spin="0">
-                    <object folder="15" file="12" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="12" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="12" time="1012" spin="0">
-                    <object folder="15" file="12" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="12" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
                 <key id="13" time="1320" spin="0">
-                    <object folder="15" file="12" x="-160.08946" y="183.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
+                    <object folder="15" file="12" x="-156.08946" y="97.940213" angle="0" scale_x="0.749684" scale_y="0.726509"/>
                 </key>
             </timeline>
         </animation>

@@ -17,18 +17,12 @@ local states = {
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("yu_duel")
         end,
-
-        timeline =
-        {
-            TimeEvent(1, function(inst)
-                PerformAction(inst)
-            end),
-        },
-
+        
         events =
         {
             EventHandler("animover", function(inst)
                 if inst.AnimState:AnimDone() then
+                    PerformAction(inst)
                     inst.sg:GoToState("idle")
                 end
             end),
