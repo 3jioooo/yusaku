@@ -21,7 +21,7 @@ local states = {
        timeline =
         {
             --刷特效和变身的时间，单位秒（Sprite里的是毫秒）
-            TimeEvent(0.925, function(inst)
+            TimeEvent(1.090, function(inst)
                  PerformAction(inst)
             end),
         },
