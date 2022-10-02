@@ -87,6 +87,9 @@ local master_postinit = function(inst)
 	inst.components.sleepingbaguser:SetSanityBonusMult(0.5)
 	inst.components.sleepingbaguser:SetHealthBonusMult(0.5)
 
+	--召唤师
+	inst:AddComponent("yu_leader")
+
 end
 
 return MakePlayerCharacter("yusaku", prefabs, assets, common_postinit, master_postinit, start_inv)

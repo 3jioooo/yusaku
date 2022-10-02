@@ -5,6 +5,7 @@ PrefabFiles = {
     "yu_foods",
     "yu_tablet",
     "yf_duel",
+    "yu_monstercard",
 }
 ---对比老版本 主要是增加了names图片 人物检查图标 还有人物的手臂修复（增加了上臂）
 -- 人物动画里面有个SWAP_ICON 里面的图片是在检查时候人物头像那里显示用的
@@ -111,7 +112,10 @@ modimport("scripts/yu_componentactions")
 --ui
 modimport("scripts/widgets/_sanitybadge")
 
--- food
+--cards
+modimport("scripts/yu_cards")
+
+--食物
 local foods = require("yu_foodrecipes")
 for k, v in pairs(foods) do
     AddCookerRecipe("cookpot", v)
@@ -119,7 +123,7 @@ end
 STRINGS.NAMES.YU_HOTDOG = "热狗"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_HOTDOG = "有人知道上面涂的是什么酱吗？"
 
---item  名字，检查，物品栏介绍
+--物品栏物品
 modimport("scripts/yu_recipes")
 STRINGS.NAMES.YU_TABLET = "药片"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_TABLET = "发达科技下的医学结晶。"
@@ -128,3 +132,7 @@ STRINGS.RECIPE_DESC.YU_TABLET = "暂时性地忘却悲痛。"
 STRINGS.NAMES.YU_DUELDISK = "决斗盘"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_DUELDISK = "与决斗者密不可分的武器。"
 STRINGS.RECIPE_DESC.YU_DUELDISK = "放入卡片的旧式决斗盘。" 	
+
+--其他物品
+STRINGS.NAMES.YU_MONSTERCARD = "怪物卡"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_MONSTERCARD = "召唤一只随机怪物"

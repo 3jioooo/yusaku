@@ -70,7 +70,7 @@ local ACTIONS =
                 end
             end
         end), 
-        state = "dolongaction",   --string or function(inst, action)  server
+        state = "dolongaction",   
     },
     
     YU_DUEL = { 
@@ -81,7 +81,7 @@ local ACTIONS =
                 return true
             end
         end), 
-        state = "yu_duel",   --string or function(inst, action)  server
+        state = "yu_duel",  
     },
 
     YU_UNDUEL = { 
@@ -92,7 +92,17 @@ local ACTIONS =
                 return true
             end
         end), 
-        state = "yu_unduel",   --string or function(inst, action)  server
+        state = "yu_unduel",   
+    },
+
+    YU_CALL = { 
+        action = MakeAction(nil, '召唤', function(act)
+            local inst = act.invobject
+            if inst and inst.components.yu_card then
+                return inst.components.yu_card:Call(act.target or act.doer)
+            end
+        end), 
+        state = "give",  
     },
 }
 

@@ -33,6 +33,12 @@ local COMPONENT_ACTIONS = {
                 end
             end
         end,
+
+        yu_card = function(inst, doer, actions)
+            if doer:HasTag("yusaku") and doer.replica.inventory:Has("yu_dueldisk",1) then
+                table.insert(actions, ACTIONS.YU_CALL)
+            end
+        end,
     }
 }
 
