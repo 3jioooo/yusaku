@@ -2,9 +2,9 @@
 local function OnFollowerRemoved(self, follower)
     if not self.followers then return end
     for type, entitys in pairs(self.followers) do
-        for k, v in pairs(entitys) do
-            if v == follower then
-                table.remove(entitys, k)
+        for inst, task in pairs(entitys) do
+            if inst == follower then
+                entitys[inst] = nil
                 if not next(entitys) then self.followers[type] = nil end
                 if not next(self.followers) then self.followers = nil end
                 return
@@ -25,35 +25,39 @@ function YU_LEADER:OnSave()
     if not self.followers then return data end
     for type, entitys in pairs(self.followers) do
         local tb = {}
-        for k, follower in pairs(entitys) do
-            local followerdata, followerrefs = follower:GetSaveRecord()     --不需要存followerrefs
-            table.insert(tb, followerdata)  
+        for follower,task in pairs(entitys) do
+            local time = GetTaskRemaining(task)
+            if time > 0 then
+                table.insert(tb, {record = follower:GetSaveRecord(), time=time})   
+            end
         end
         data[type] = tb
     end
     return data
 end
 
+local debug = false
 function YU_LEADER:OnLoad(data)
+    if debug then
+        print("ignore OnLoad")
+        return
+    end
+    print("Loading: ", data, GetTableSize(data))
     if not data or not next(data) then return end
-    if not self.followers then self.followers = {} end
     for type, tb in pairs(data) do
-        local followers = {}
-        for k, record in pairs(tb) do
-            local follower = SpawnSaveRecord(record)
+        for k, v in pairs(tb) do
+            local follower = SpawnSaveRecord(v.record)
             if follower then 
-                self:PostInitFollower(follower)
-                table.insert(followers, follower)
+                self:PostInitFollower(type, follower, v.time)
             end
         end
-        self.followers[type] = followers
     end
 end
 
 function YU_LEADER:OnRemoveEntity()
     if not self.followers then return end
     for type, entitys in pairs(self.followers) do
-        for k, follower in pairs(entitys) do
+        for follower, task in pairs(entitys) do
             self.inst:RemoveEventCallback("onremove", self.OnFollowerRemoved, follower)
             follower:Remove()
         end
@@ -62,7 +66,7 @@ function YU_LEADER:OnRemoveEntity()
 end
 
 local function emptyfn() end
-function YU_LEADER:PostInitFollower(follower)
+function YU_LEADER:PostInitFollower(type, follower, time)
     follower.persists = false	--不自动保存数据
     if not follower.components.follower then  follower:AddComponent("follower") end
     follower.components.follower:SetLeader(self.inst)
@@ -73,14 +77,17 @@ function YU_LEADER:PostInitFollower(follower)
     end  
     follower.AnimState:SetMultColour(0,0,1,0.4)
 
+    if not self.followers then self.followers={} end
+    if not self.followers[type] then self.followers[type]={} end
     self.inst:ListenForEvent("onremove", self.OnFollowerRemoved, follower)
+    self.followers[type][follower] = follower:DoTaskInTime(time, follower.Remove);
 end
 
 function YU_LEADER:SpawnFollower(type, prefab, time)
     if not TUNING.YU_CARDMAXCOUNT[type] then
         print("Unknown card type: "..type)
         return nil
-    elseif self.followers and self.followers[type] and #self.followers[type]>=TUNING.YU_CARDMAXCOUNT[type] then
+    elseif self.followers and self.followers[type] and GetTableSize(self.followers[type])>=TUNING.YU_CARDMAXCOUNT[type] then
         if self.inst.components.talker then
             self.inst.components.talker:Say(STRINGS.YU_CARDMAXCOUNT[type] or type.."卡召唤物超过上限.")
         end
@@ -93,12 +100,8 @@ function YU_LEADER:SpawnFollower(type, prefab, time)
         return nil
     end
  
-    follower.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
-    self:PostInitFollower(follower)
-
-    if not self.followers then self.followers={} end
-    if not self.followers[type] then self.followers[type]={} end
-    table.insert(self.followers[type], follower)
+    follower.Transform:SetPosition(self.inst.Transform:GetWorldPosition())  --第一次生成需要设置位置
+    self:PostInitFollower(type, follower, time)
 
     return follower
 end
