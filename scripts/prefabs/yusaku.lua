@@ -19,6 +19,7 @@ local start_inv = {
 	"yu_dueldisk"
 }
 
+--yusaku
 local function onsanitydelta(inst, data)
 	if data.newpercent <= 0 then
 		inst.components.yu_duel:UnDuel()
@@ -41,6 +42,61 @@ local function onunduel(inst, data)
 	prefab.Transform:SetPosition(0,0,0)
 	inst.AnimState:SetSkin("yusaku")
 end
+
+--召唤物
+local COLOUR = {0/255, 0/255, 255/255, 0.5}	--颜色 0-1
+local SHARE_TARGET_DIST = 30	--共享目标的距离
+local MAX_TARGET_SHARES = 10	--最大共享目标的召唤物数
+
+local function IsFollower(inst)
+	return inst:HasTag("yu_follower")
+end
+
+local function OnAttacked(inst, data)
+	local myleader = inst.components.follower.leader
+	if data.attacker == myleader or IsFollower(data.attacker) then
+		if inst.components.health then
+			inst.components.health:Kill()
+		else
+			inst:Remove()
+		end
+	else
+		inst.components.combat:YU_ShareTarget(data.attacker, SHARE_TARGET_DIST, IsFollower, MAX_TARGET_SHARES)
+	end
+end
+
+local brain = require "brains/yu_followerbrain"
+local function emptyfn() end
+
+local function OnFollowerPostInit(inst, type, time)
+	inst:AddTag("yu_follower")
+	inst.components.follower:KeepLeaderOnAttacked()
+	inst:ListenForEvent("death", function ()
+		if inst.components.health then
+			inst.components.health:Kill()
+		else
+			inst:Remove()
+		end
+	end, inst.components.follower.leader)
+
+	inst.AnimState:SetMultColour(unpack(COLOUR))     --设置颜色
+
+    if inst.components.lootdropper then     --不能直接删除组件，避免报错
+        inst.components.lootdropper.DropLoot = emptyfn  --直接不给生成
+    end  
+
+    if inst.components.combat then
+        inst.components.combat:SetRetargetFunction(inst.components.combat.retargetperiod or 3, nil)
+        inst.components.combat:SetTarget(nil)
+		inst.components.combat.YU_ShareTarget = inst.components.combat.ShareTarget
+		inst.components.combat.ShareTarget = emptyfn			--避免过去的种族仇恨
+		inst:ListenForEvent("attacked", OnAttacked)
+	end
+
+	inst:SetBrain(brain)
+    inst:RestartBrain()
+end
+
 
 -- 这个函数将在服务器和客户端都会执行
 -- 一般用于添加小地图标签等动画文件或者需要主客机都执行的组件（少数）
@@ -89,6 +145,7 @@ local master_postinit = function(inst)
 
 	--召唤师
 	inst:AddComponent("yu_leader")
+	inst.components.yu_leader:SetPostInitFn(OnFollowerPostInit)
 
 end
 
