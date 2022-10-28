@@ -19,6 +19,7 @@ end
 
 --增加卡牌掉落几率
 AddCardDropChance("yu_monstercard", 0.05)
+AddCardDropChance("yu_decodercard", 0.05)
 
 AddPrefabPostInitAny(function (inst)
     if not inst.components.lootdropper then return end

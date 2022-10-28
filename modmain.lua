@@ -6,6 +6,8 @@ PrefabFiles = {
     "yu_tablet",
     "yf_duel",
     "yu_monstercard",
+    "yu_decodercard",
+    "yu_decoder",
 }
 ---对比老版本 主要是增加了names图片 人物检查图标 还有人物的手臂修复（增加了上臂）
 -- 人物动画里面有个SWAP_ICON 里面的图片是在检查时候人物头像那里显示用的
@@ -133,6 +135,13 @@ STRINGS.NAMES.YU_DUELDISK = "决斗盘"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_DUELDISK = "与决斗者密不可分的武器。"
 STRINGS.RECIPE_DESC.YU_DUELDISK = "放入卡片的旧式决斗盘。" 	
 
---其他物品
+--卡牌
 STRINGS.NAMES.YU_MONSTERCARD = "怪物卡"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_MONSTERCARD = "召唤一只随机怪物"
+
+STRINGS.NAMES.YU_DECODERCARD = "解码语卡"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_DECODERCARD = "召唤解码语者"
+
+--生物
+STRINGS.NAMES.YU_DECODER = "解码语者"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.YU_DECODER = ""
